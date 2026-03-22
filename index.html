@@ -1,2 +1,75 @@
-# TLE Prototypes
-Initializing repo...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLE Prototypes — AI PM Pipeline Agent 6</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --dtl-navy: #1B2A4A;
+            --dtl-blue: #0596DE;
+            --dtl-green: #00C48C;
+            --dtl-gray-50: #F7F8FA;
+            --dtl-gray-100: #F0F2F5;
+            --dtl-gray-200: #E4E7EB;
+            --dtl-gray-500: #6B7280;
+            --dtl-gray-800: #1F2937;
+        }
+        body { font-family: 'Open Sans', sans-serif; background: var(--dtl-gray-50); color: var(--dtl-gray-800); }
+        .header { background: white; border-bottom: 1px solid var(--dtl-gray-200); padding: 40px 32px; text-align: center; }
+        .header h1 { color: var(--dtl-navy); font-size: 28px; margin-bottom: 8px; }
+        .header p { color: var(--dtl-gray-500); font-size: 15px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 32px; }
+        .priority-section { margin-bottom: 48px; }
+        .priority-title { color: var(--dtl-navy); font-size: 18px; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--dtl-blue); }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; border: 1px solid var(--dtl-gray-200); border-radius: 8px; padding: 24px; transition: all 0.3s ease; text-decoration: none; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--dtl-blue); box-shadow: 0 4px 12px rgba(5, 150, 222, 0.15); transform: translateY(-2px); }
+        .card-title { color: var(--dtl-navy); font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+        .card-desc { color: var(--dtl-gray-500); font-size: 13px; margin-bottom: 16px; flex: 1; }
+        .card-link { color: var(--dtl-blue); font-weight: 600; font-size: 13px; text-decoration: none; display: inline-block; }
+        .card-link:hover { text-decoration: underline; }
+        .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 3px; margin-bottom: 12px; }
+        .badge-p1 { background: #FFE0E0; color: #C62828; }
+        .badge-p2 { background: #FFF3CD; color: #F57F17; }
+        .badge-p3 { background: #E8F5E9; color: #2E7D32; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TLE Prototypes</h1>
+        <p>AI PM Pipeline Agent 6 — Doctolib Tele-expertise Platform</p>
+    </div>
+    <div class="container">
+        <div class="priority-section">
+            <div class="priority-title">Priority 1: Fix Email Validation Blocker (IAM-1990)</div>
+            <div class="cards-grid">
+                <a href="proto-p1a-hotfix-popup.html" class="card"><span class="badge badge-p1">PRIORITY 1</span><div class="card-title">P1A: Direct IAM-1990 Hotfix</div><div class="card-desc">Email validation popup fix — shows working vs broken states with 6-digit code verification.</div><span class="card-link">View Prototype →</span></a>
+                <a href="proto-p1b-sms-fallback.html" class="card"><span class="badge badge-p1">PRIORITY 1</span><div class="card-title">P1B: SMS/2FA Bypass</div><div class="card-desc">Email change with SMS validation fallback option when email validation fails.</div><span class="card-link">View Prototype →</span></a>
+                <a href="proto-p1c-tle-prevalidation.html" class="card"><span class="badge badge-p1">PRIORITY 1</span><div class="card-title">P1C: TLE Pre-Validation</div><div class="card-desc">Email validation during TLE signup flow with stepper UI.</div><span class="card-link">View Prototype →</span></a>
+            </div>
+        </div>
+        <div class="priority-section">
+            <div class="priority-title">Priority 2: Message Storage Tiering & Monitoring</div>
+            <div class="cards-grid">
+                <a href="proto-p2a-storage-tiering.html" class="card"><span class="badge badge-p2">PRIORITY 2</span><div class="card-title">P2A: Hot-Warm-Cold Storage Tiering</div><div class="card-desc">TLE conversation with storage tier indicators and lazy-loaded archived messages.</div><span class="card-link">View Prototype →</span></a>
+                <a href="proto-p2b-monitoring-dashboard.html" class="card"><span class="badge badge-p2">PRIORITY 2</span><div class="card-title">P2B: Enhanced Monitoring & Alerting</div><div class="card-desc">DevOps-style monitoring dashboard with latency metrics, storage utilization, and active alerts.</div><span class="card-link">View Prototype →</span></a>
+                <a href="proto-p2c-query-optimization.html" class="card"><span class="badge badge-p2">PRIORITY 2</span><div class="card-title">P2C: Query Optimization</div><div class="card-desc">Before/after comparison dashboard showing query performance improvements.</div><span class="card-link">View Prototype →</span></a>
+            </div>
+        </div>
+        <div class="priority-section">
+            <div class="priority-title">Priority 3: Engagement Levers Bundle (45% → 55% Completion)</div>
+            <div class="cards-grid">
+                <a href="proto-p3a-full-bundle.html" class="card"><span class="badge badge-p3">PRIORITY 3</span><div class="card-title">P3A: Full Stack Bundle</div><div class="card-desc">Badging + push notifications + specialist campaign — the complete engagement lever experience.</div><span class="card-link">View Prototype →</span></a>
+                <a href="proto-p3b-badging-only.html" class="card"><span class="badge badge-p3">PRIORITY 3</span><div class="card-title">P3B: Lightweight Badging Only</div><div class="card-desc">Simple "TLE Accepted" badges with filter — lightweight, focused change.</div><span class="card-link">View Prototype →</span></a>
+                <a href="proto-p3c-campaign-first.html" class="card"><span class="badge badge-p3">PRIORITY 3</span><div class="card-title">P3C: Specialist Supply Focus</div><div class="card-desc">Specialist onboarding campaign management dashboard with opt-in tracking and metrics.</div><span class="card-link">View Prototype →</span></a>
+                <a href="proto-p3d-phased-rollout.html" class="card"><span class="badge badge-p3">PRIORITY 3</span><div class="card-title">P3D: Phased Rollout Timeline</div><div class="card-desc">Visual roadmap with metric gates — Week 2 (Badging) → Week 5 (Response UX).</div><span class="card-link">View Prototype →</span></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
