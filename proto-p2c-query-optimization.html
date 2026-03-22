@@ -2102,79 +2102,89 @@
 
     <div class="prototype-nav" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10000;background:white;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);display:flex;padding:6px;gap:4px;font-family:'Open Sans',sans-serif;">
       <a href="index.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:#F0F2F5;border:1px solid #E4E7EB;">Home</a>
-      <a href="proto-p1a-hotfix-popup.html" style="padding:6px 14px;text-decoration:none;color:white;border-radius:6px;font-size:13px;font-weight:600;background:#0596DE;">◆ P1A</a>
-      <a href="proto-p1b-sms-fallback.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:white;border:1px solid #E4E7EB;">P1B</a>
-      <a href="proto-p1c-tle-prevalidation.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:white;border:1px solid #E4E7EB;">P1C</a>
+      <a href="proto-p2a-storage-tiering.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:white;border:1px solid #E4E7EB;">P2A</a>
+      <a href="proto-p2b-monitoring-dashboard.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:white;border:1px solid #E4E7EB;">P2B</a>
+      <a href="proto-p2c-query-optimization.html" style="padding:6px 14px;text-decoration:none;color:white;border-radius:6px;font-size:13px;font-weight:600;background:#0596DE;">◆ P2C</a>
     </div>
 
-      <div style="padding: 32px; max-width: 900px; margin: 0 auto;">
-        <h2 style="color: #1B2A4A; margin-bottom: 8px;">Account Settings — Change Email</h2>
-        <p style="color: #6B7280; margin-bottom: 24px; font-size: 14px;">Update your email address to enable Tele-expertise access</p>
+      <div style="padding: 32px; max-width: 1200px; margin: 0 auto;">
+        <h2 style="color: #1B2A4A; margin-bottom: 24px;">Query Optimization Analysis</h2>
 
-        <div style="background: white; border: 1px solid #E4E7EB; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
-          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A;">Current Email</label>
-          <input type="email" value="martin.dupont@clinic.fr" style="width: 100%; padding: 10px 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; margin-bottom: 16px;" readonly>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <!-- Before Optimization -->
+          <div style="background: white; border: 2px solid #D32F2F; border-radius: 8px; padding: 24px;">
+            <h3 style="color: #D32F2F; margin-bottom: 16px; font-size: 16px; font-weight: 700;">Before Optimization</h3>
 
-          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A;">New Email</label>
-          <input type="email" id="newEmail" placeholder="Enter your new email" style="width: 100%; padding: 10px 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; margin-bottom: 16px;">
+            <div style="background: #FFEBEE; border: 1px solid #FFCDD2; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+              <div style="margin-bottom: 12px;">
+                <div style="color: #6B7280; font-size: 12px; margin-bottom: 4px;">Query Execution Time</div>
+                <div style="font-size: 24px; font-weight: 700; color: #D32F2F;">450 ms</div>
+              </div>
+              <div style="margin-bottom: 12px;">
+                <div style="color: #6B7280; font-size: 12px; margin-bottom: 4px;">CPU Usage</div>
+                <div style="font-size: 24px; font-weight: 700; color: #D32F2F;">85%</div>
+              </div>
+              <div>
+                <div style="color: #6B7280; font-size: 12px; margin-bottom: 4px;">Memory</div>
+                <div style="font-size: 24px; font-weight: 700; color: #D32F2F;">1.2 GB</div>
+              </div>
+            </div>
 
-          <button onclick="showValidationPopup()" style="background: #0596DE; color: white; border: none; border-radius: 4px; padding: 10px 20px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">Change Email</button>
+            <h4 style="color: #1B2A4A; margin-bottom: 8px; font-size: 13px; font-weight: 600;">Issues Detected:</h4>
+            <ul style="color: #D32F2F; margin: 0; padding-left: 20px; font-size: 13px;">
+              <li style="margin-bottom: 4px;"><strong>Full Table Scans</strong> on messages_archive</li>
+              <li style="margin-bottom: 4px;"><strong>Missing Index</strong> on (user_id, created_at)</li>
+              <li style="margin-bottom: 4px;"><strong>N+1 Queries</strong> in conversation loop</li>
+              <li>No query caching</li>
+            </ul>
+          </div>
+
+          <!-- After Optimization -->
+          <div style="background: white; border: 2px solid #00C48C; border-radius: 8px; padding: 24px;">
+            <h3 style="color: #00C48C; margin-bottom: 16px; font-size: 16px; font-weight: 700;">After Optimization</h3>
+
+            <div style="background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+              <div style="margin-bottom: 12px;">
+                <div style="color: #6B7280; font-size: 12px; margin-bottom: 4px;">Query Execution Time</div>
+                <div style="font-size: 24px; font-weight: 700; color: #00C48C;">45 ms</div>
+                <div style="color: #00C48C; font-size: 11px; margin-top: 4px;">⬇ 90% improvement</div>
+              </div>
+              <div style="margin-bottom: 12px;">
+                <div style="color: #6B7280; font-size: 12px; margin-bottom: 4px;">CPU Usage</div>
+                <div style="font-size: 24px; font-weight: 700; color: #00C48C;">32%</div>
+                <div style="color: #00C48C; font-size: 11px; margin-top: 4px;">⬇ 62% reduction</div>
+              </div>
+              <div>
+                <div style="color: #6B7280; font-size: 12px; margin-bottom: 4px;">Memory</div>
+                <div style="font-size: 24px; font-weight: 700; color: #00C48C;">320 MB</div>
+                <div style="color: #00C48C; font-size: 11px; margin-top: 4px;">⬇ 73% reduction</div>
+              </div>
+            </div>
+
+            <h4 style="color: #1B2A4A; margin-bottom: 8px; font-size: 13px; font-weight: 600;">Optimizations Applied:</h4>
+            <ul style="color: #00C48C; margin: 0; padding-left: 20px; font-size: 13px;">
+              <li style="margin-bottom: 4px;"><strong>✓ Created Indexes</strong> on (user_id, created_at)</li>
+              <li style="margin-bottom: 4px;"><strong>✓ Query Batching</strong> eliminated N+1 issues</li>
+              <li style="margin-bottom: 4px;"><strong>✓ Query Caching</strong> with Redis (5 min TTL)</li>
+              <li>✓ Query Plan optimized</li>
+            </ul>
+          </div>
         </div>
 
-        <div style="background: #F7F8FA; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
-          <h3 style="color: #1B2A4A; margin-bottom: 8px; font-size: 14px; font-weight: 600;">Before/After Toggle:</h3>
-          <button onclick="toggleBrokenState()" style="background: white; color: #0596DE; border: 1px solid #0596DE; border-radius: 4px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif; font-size: 13px;">Show Broken Version (popup doesn't render)</button>
-        </div>
-
-        <!-- Validation Popup (Initially Hidden) -->
-        <div id="validationPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 32px; z-index: 9999; width: 90%; max-width: 400px;">
-          <h3 style="color: #1B2A4A; margin-bottom: 8px;">Verify Your Email</h3>
-          <p style="color: #6B7280; margin-bottom: 16px; font-size: 14px;">We sent a 6-digit code to your new email. Enter it below.</p>
-
-          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A; font-size: 13px;">Verification Code</label>
-          <input type="text" id="verificationCode" placeholder="000000" maxlength="6" style="width: 100%; padding: 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; font-size: 18px; text-align: center; letter-spacing: 4px; margin-bottom: 16px;">
-
-          <button onclick="verifyCode()" style="width: 100%; background: #0596DE; color: white; border: none; border-radius: 4px; padding: 12px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif; margin-bottom: 8px;">Verify Code</button>
-          <button onclick="closeValidationPopup()" style="width: 100%; background: white; color: #0596DE; border: 1px solid #0596DE; border-radius: 4px; padding: 12px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">Cancel</button>
-        </div>
-
-        <!-- Overlay -->
-        <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 9998;" onclick="closeValidationPopup()"></div>
-
-        <!-- Success Message -->
-        <div id="successMessage" style="display: none; background: #E8F5E9; border: 1px solid #4CAF50; border-radius: 8px; padding: 16px; margin-top: 16px; text-align: center;">
-          <p style="color: #2E7D32; font-weight: 600; margin: 0;">✓ Email validated — TLE access enabled</p>
+        <!-- Action Button -->
+        <div style="margin-top: 24px;">
+          <button onclick="runQueryAnalysis()" style="background: #0596DE; color: white; border: none; border-radius: 4px; padding: 10px 20px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif; margin-right: 12px;">Run Query Analysis</button>
+          <button onclick="viewExecutionPlan()" style="background: white; color: #0596DE; border: 1px solid #0596DE; border-radius: 4px; padding: 10px 20px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">View Execution Plan</button>
         </div>
       </div>
 
       <script>
-        function showValidationPopup() {
-          document.getElementById('validationPopup').style.display = 'block';
-          document.getElementById('popupOverlay').style.display = 'block';
+        function runQueryAnalysis() {
+          alert('Running query analysis...\n\nAnalyzing patterns across 1.2M messages\nIdentifying missing indexes and optimization opportunities\n\nCompleted in 3.2 seconds');
         }
 
-        function closeValidationPopup() {
-          document.getElementById('validationPopup').style.display = 'none';
-          document.getElementById('popupOverlay').style.display = 'none';
-        }
-
-        function verifyCode() {
-          const code = document.getElementById('verificationCode').value;
-          if (code.length === 6 && /^\d+$/.test(code)) {
-            document.getElementById('validationPopup').style.display = 'none';
-            document.getElementById('popupOverlay').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-          } else {
-            alert('Please enter a valid 6-digit code');
-          }
-        }
-
-        function toggleBrokenState() {
-          const popup = document.getElementById('validationPopup');
-          if (popup.style.display === 'none') {
-            // This simulates the broken state - popup won't show even after clicking
-            alert('Simulated Broken State: Email validation popup failed to render. User is stuck and cannot proceed.');
-          }
+        function viewExecutionPlan() {
+          alert('Query Execution Plan:\n\nBefore: FULL SCAN messages_archive → Filter on user_id (450ms)\n\nAfter: INDEX SEEK on (user_id, created_at) → Result (45ms)');
         }
       </script>
 

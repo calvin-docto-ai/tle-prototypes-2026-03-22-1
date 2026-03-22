@@ -2102,44 +2102,55 @@
 
     <div class="prototype-nav" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10000;background:white;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);display:flex;padding:6px;gap:4px;font-family:'Open Sans',sans-serif;">
       <a href="index.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:#F0F2F5;border:1px solid #E4E7EB;">Home</a>
-      <a href="proto-p1a-hotfix-popup.html" style="padding:6px 14px;text-decoration:none;color:white;border-radius:6px;font-size:13px;font-weight:600;background:#0596DE;">◆ P1A</a>
-      <a href="proto-p1b-sms-fallback.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:white;border:1px solid #E4E7EB;">P1B</a>
+      <a href="proto-p1a-hotfix-popup.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:white;border:1px solid #E4E7EB;">P1A</a>
+      <a href="proto-p1b-sms-fallback.html" style="padding:6px 14px;text-decoration:none;color:white;border-radius:6px;font-size:13px;font-weight:600;background:#0596DE;">◆ P1B</a>
       <a href="proto-p1c-tle-prevalidation.html" style="padding:6px 14px;text-decoration:none;color:#1B2A4A;border-radius:6px;font-size:13px;font-weight:600;background:white;border:1px solid #E4E7EB;">P1C</a>
     </div>
 
       <div style="padding: 32px; max-width: 900px; margin: 0 auto;">
         <h2 style="color: #1B2A4A; margin-bottom: 8px;">Account Settings — Change Email</h2>
-        <p style="color: #6B7280; margin-bottom: 24px; font-size: 14px;">Update your email address to enable Tele-expertise access</p>
+        <p style="color: #6B7280; margin-bottom: 24px; font-size: 14px;">Update your email address and choose your verification method</p>
 
         <div style="background: white; border: 1px solid #E4E7EB; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
-          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A;">Current Email</label>
-          <input type="email" value="martin.dupont@clinic.fr" style="width: 100%; padding: 10px 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; margin-bottom: 16px;" readonly>
-
           <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A;">New Email</label>
           <input type="email" id="newEmail" placeholder="Enter your new email" style="width: 100%; padding: 10px 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; margin-bottom: 16px;">
 
-          <button onclick="showValidationPopup()" style="background: #0596DE; color: white; border: none; border-radius: 4px; padding: 10px 20px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">Change Email</button>
+          <button onclick="proceedToValidation()" style="background: #0596DE; color: white; border: none; border-radius: 4px; padding: 10px 20px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">Continue</button>
         </div>
 
-        <div style="background: #F7F8FA; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
-          <h3 style="color: #1B2A4A; margin-bottom: 8px; font-size: 14px; font-weight: 600;">Before/After Toggle:</h3>
-          <button onclick="toggleBrokenState()" style="background: white; color: #0596DE; border: 1px solid #0596DE; border-radius: 4px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif; font-size: 13px;">Show Broken Version (popup doesn't render)</button>
+        <!-- Validation Method Selection (Initially Hidden) -->
+        <div id="validationMethodPanel" style="display: none; background: white; border: 1px solid #E4E7EB; border-radius: 8px; padding: 24px;">
+          <h3 style="color: #1B2A4A; margin-bottom: 16px;">Choose Verification Method</h3>
+
+          <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+            <button onclick="selectValidationMethod('email')" id="emailMethodBtn" style="flex: 1; padding: 16px; border: 2px solid #0596DE; background: #E8F4FD; border-radius: 8px; cursor: pointer; text-align: left; font-family: 'Open Sans', sans-serif;">
+              <div style="font-weight: 600; color: #1B2A4A; margin-bottom: 4px;">📧 Email (Primary)</div>
+              <div style="font-size: 13px; color: #6B7280;">6-digit code sent to your email</div>
+            </button>
+            <button onclick="selectValidationMethod('sms')" id="smsMethodBtn" style="flex: 1; padding: 16px; border: 2px solid #E4E7EB; background: white; border-radius: 8px; cursor: pointer; text-align: left; font-family: 'Open Sans', sans-serif;">
+              <div style="font-weight: 600; color: #1B2A4A; margin-bottom: 4px;">📱 SMS (Fallback)</div>
+              <div style="font-size: 13px; color: #6B7280;">Code sent to your phone</div>
+            </button>
+          </div>
+
+          <div id="emailValidationContent" style="display: none;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A; font-size: 13px;">Email Verification Code</label>
+            <input type="text" id="emailCode" placeholder="000000" maxlength="6" style="width: 100%; padding: 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; font-size: 18px; text-align: center; letter-spacing: 4px; margin-bottom: 16px;">
+            <button onclick="verifyEmail()" style="width: 100%; background: #0596DE; color: white; border: none; border-radius: 4px; padding: 12px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">Verify Email</button>
+          </div>
+
+          <div id="smsValidationContent" style="display: none;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A; font-size: 13px;">Phone Number</label>
+            <input type="tel" id="phoneNumber" placeholder="+33 6 12 34 56 78" style="width: 100%; padding: 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; margin-bottom: 16px;">
+            <button onclick="sendSmsCode()" style="width: 100%; background: #0596DE; color: white; border: none; border-radius: 4px; padding: 12px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif; margin-bottom: 16px;">Send Code via SMS</button>
+
+            <div id="smsCodeEntry" style="display: none;">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A; font-size: 13px;">SMS Verification Code</label>
+              <input type="text" id="smsCode" placeholder="000000" maxlength="6" style="width: 100%; padding: 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; font-size: 18px; text-align: center; letter-spacing: 4px; margin-bottom: 16px;">
+              <button onclick="verifySms()" style="width: 100%; background: #0596DE; color: white; border: none; border-radius: 4px; padding: 12px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">Verify SMS Code</button>
+            </div>
+          </div>
         </div>
-
-        <!-- Validation Popup (Initially Hidden) -->
-        <div id="validationPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 32px; z-index: 9999; width: 90%; max-width: 400px;">
-          <h3 style="color: #1B2A4A; margin-bottom: 8px;">Verify Your Email</h3>
-          <p style="color: #6B7280; margin-bottom: 16px; font-size: 14px;">We sent a 6-digit code to your new email. Enter it below.</p>
-
-          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #1B2A4A; font-size: 13px;">Verification Code</label>
-          <input type="text" id="verificationCode" placeholder="000000" maxlength="6" style="width: 100%; padding: 12px; border: 1px solid #E4E7EB; border-radius: 4px; font-family: 'Open Sans', sans-serif; font-size: 18px; text-align: center; letter-spacing: 4px; margin-bottom: 16px;">
-
-          <button onclick="verifyCode()" style="width: 100%; background: #0596DE; color: white; border: none; border-radius: 4px; padding: 12px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif; margin-bottom: 8px;">Verify Code</button>
-          <button onclick="closeValidationPopup()" style="width: 100%; background: white; color: #0596DE; border: 1px solid #0596DE; border-radius: 4px; padding: 12px; font-weight: 600; cursor: pointer; font-family: 'Open Sans', sans-serif;">Cancel</button>
-        </div>
-
-        <!-- Overlay -->
-        <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 9998;" onclick="closeValidationPopup()"></div>
 
         <!-- Success Message -->
         <div id="successMessage" style="display: none; background: #E8F5E9; border: 1px solid #4CAF50; border-radius: 8px; padding: 16px; margin-top: 16px; text-align: center;">
@@ -2148,32 +2159,52 @@
       </div>
 
       <script>
-        function showValidationPopup() {
-          document.getElementById('validationPopup').style.display = 'block';
-          document.getElementById('popupOverlay').style.display = 'block';
+        function proceedToValidation() {
+          if (document.getElementById('newEmail').value) {
+            document.getElementById('validationMethodPanel').style.display = 'block';
+            selectValidationMethod('email');
+          } else {
+            alert('Please enter an email address');
+          }
         }
 
-        function closeValidationPopup() {
-          document.getElementById('validationPopup').style.display = 'none';
-          document.getElementById('popupOverlay').style.display = 'none';
+        function selectValidationMethod(method) {
+          document.getElementById('emailMethodBtn').style.borderColor = method === 'email' ? '#0596DE' : '#E4E7EB';
+          document.getElementById('emailMethodBtn').style.background = method === 'email' ? '#E8F4FD' : 'white';
+          document.getElementById('smsMethodBtn').style.borderColor = method === 'sms' ? '#0596DE' : '#E4E7EB';
+          document.getElementById('smsMethodBtn').style.background = method === 'sms' ? '#E8F4FD' : 'white';
+
+          document.getElementById('emailValidationContent').style.display = method === 'email' ? 'block' : 'none';
+          document.getElementById('smsValidationContent').style.display = method === 'sms' ? 'block' : 'none';
         }
 
-        function verifyCode() {
-          const code = document.getElementById('verificationCode').value;
-          if (code.length === 6 && /^\d+$/.test(code)) {
-            document.getElementById('validationPopup').style.display = 'none';
-            document.getElementById('popupOverlay').style.display = 'none';
+        function verifyEmail() {
+          const code = document.getElementById('emailCode').value;
+          if (code.length === 6) {
+            document.getElementById('validationMethodPanel').style.display = 'none';
             document.getElementById('successMessage').style.display = 'block';
           } else {
             alert('Please enter a valid 6-digit code');
           }
         }
 
-        function toggleBrokenState() {
-          const popup = document.getElementById('validationPopup');
-          if (popup.style.display === 'none') {
-            // This simulates the broken state - popup won't show even after clicking
-            alert('Simulated Broken State: Email validation popup failed to render. User is stuck and cannot proceed.');
+        function sendSmsCode() {
+          const phone = document.getElementById('phoneNumber').value;
+          if (phone.length > 9) {
+            document.getElementById('smsCodeEntry').style.display = 'block';
+            alert('SMS code sent to ' + phone);
+          } else {
+            alert('Please enter a valid phone number');
+          }
+        }
+
+        function verifySms() {
+          const code = document.getElementById('smsCode').value;
+          if (code.length === 6) {
+            document.getElementById('validationMethodPanel').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+          } else {
+            alert('Please enter a valid 6-digit code');
           }
         }
       </script>
